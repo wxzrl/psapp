@@ -1,0 +1,130 @@
+{
+	//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [
+		{
+			"path":"pages/login/login",
+			"style": {
+				"navigationStyle":"custom",
+				"app-plus":{
+				"titleView":false,
+				"bounce":"none"
+				}
+			}
+		}, 
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		}, 
+		{
+			"path": "pages/me/index",
+			"style": {
+				"navigationBarTitleText": "我的"
+				
+			}
+		}, 
+		{
+			"path": "pages/rinse_record/index",
+			"style": {
+				"navigationBarTitleText": "提交清洁记录"
+				
+			}
+		}, 
+		{
+			"path": "pages/clean/index",
+			"style": {
+				"navigationBarTitleText": "清洁记录"
+				
+			}
+		}, 
+		{
+			"path": "pages/task/index",
+			"style": {
+				"navigationBarTitleText": "任务记录"
+				
+			}
+		}, 
+		{
+			"path": "pages/task_enact/index",
+			"style": {
+				"navigationBarTitleText": "任务制定"
+				
+			}
+		}, 
+		{
+			"path": "pages/tendency/index",
+			"style": {
+				"navigationBarTitleText": "趋势分析"
+				
+			}
+		}, 
+		{
+			"path": "pages/together/index",
+			"style": {
+				"navigationBarTitleText": "同期对比"
+				
+			}
+		}, 
+		{
+			"path": "pages/history/index",
+			"style": {
+				"navigationBarTitleText": "历史数据"
+				
+			}
+		}, 
+		{
+			"path": "pages/Real_time/index",
+			"style": {
+				"navigationBarTitleText": "实时数据"
+				
+			}
+		}, 
+		{
+			"path": "pages/record_list/index",
+			"style": {
+				"navigationBarTitleText": "预警通知"
+				
+			}
+		}, 
+		{
+			"path": "pages/dispose/index",
+			"style": {
+				"navigationBarTitleText": "异常处理"
+				
+			}
+		}, 
+		{
+			"path": "pages/sms/index",
+			"style": {
+				"navigationBarTitleText": "短信查看"
+				
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#3471FF",
+		"backgroundColor": "#3471FF"
+	},
+	"tabBar": {
+		"color": "#4DDBAE",
+		"backgroundColor": "#FFF",
+		"selectedColor": "#4DDBAE",
+		"borderStyle": "white",
+		"list": [{
+				"text": "首页",
+				"pagePath": "pages/index/index",
+				"iconPath": "/static/home.png",
+				"selectedIconPath": "/static/home-active.png"
+			},
+			{
+				"text": "我",
+				"pagePath": "pages/me/index",
+				"iconPath": "/static/me.png",
+				"selectedIconPath": "/static/me-active.png"
+			}
+		],
+		"position": "bottom"
+	}
+}
