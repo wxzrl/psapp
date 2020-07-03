@@ -17,7 +17,7 @@
 				<navigator :url="'/pages/history/index'">
 				<div class="index_center">
 					<p class="index_name">
-						<image src="../../static/history.svg" alt="" srcset=""></image>
+						<image src="/static/history.svg" alt="" srcset=""></image>
 					</p>
 					<span class="index_worde">历史数据</span>
 				</div>
@@ -25,7 +25,7 @@
 				<navigator :url="'/pages/tendency/index'">
 				<div class="index_center">
 					<p class="index_name">
-						<image src="../../static/trend.svg" alt="" srcset=""></image>
+						<image src="/static/trend.svg" alt="" srcset=""></image>
 					</p>
 					<span class="index_worde">趋势分析</span>
 				</div>
@@ -33,7 +33,7 @@
 				<navigator :url="'/pages/together/index'">
 				<div class="index_center">
 					<p class="index_name">
-						<image src="../../static/with.svg" alt="" srcset=""></image>
+						<image src="/static/with.svg" alt="" srcset=""></image>
 					</p>
 					<span class="index_worde">同期对比</span>
 				</div>
@@ -43,7 +43,7 @@
 				<navigator :url="'/pages/task_enact/index'">
 				<div class="index_center">
 					<p class="index_name">
-						<image src="../../static/rinse.svg" alt="" srcset=""></image>
+						<image src="/static/rinse.svg" alt="" srcset=""></image>
 					</p>
 					<span class="index_worde">任务制定</span>
 				</div>
@@ -51,7 +51,7 @@
 				<navigator :url="'/pages/rinse_record/index'">
 					<div class="index_center">
 						<p class="index_name">
-							<image src="../../static/record.svg" alt="" srcset=""></image>
+							<image src="/static/record.svg" alt="" srcset=""></image>
 						</p>
 						<span class="index_worde">提交清洗记录</span>
 					</div>
@@ -59,7 +59,7 @@
 				<navigator :url="'/pages/clean/index'">
 					<div class="index_center">
 						<p class="index_name">
-							<image src="../../static/clean.svg" alt="" srcset=""></image>
+							<image  src="/static/clean.svg" alt="" srcset=""></image>
 						</p>
 						<span class="index_worde">清洗记录</span>
 					</div>
@@ -67,7 +67,7 @@
 				<navigator :url="'/pages/task/index'">
 				<div class="index_center">
 					<p class="index_name">
-						<image src="../../static/task.svg" alt="" srcset=""></image>
+						<image src="/static/task.svg" alt="" srcset=""></image>
 					</p>
 					<span class="index_worde">任务记录</span>
 				</div>

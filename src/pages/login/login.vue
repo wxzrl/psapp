@@ -65,7 +65,7 @@
 	right: 0;
 	bottom: 0;
 	overflow: hidden;
-    background-image: url(../../static/login_back.svg);
+    background-image: url(../../static/login_back.png);
     background-size: cover;
     background-repeat: no-repeat;
 }

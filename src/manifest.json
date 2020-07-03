@@ -102,12 +102,9 @@
     /* SDK配置 */
     "quickapp" : {},
     /* 快应用特有相关 */
-    "mp-weixin" : {
-        /* 微信小程序特有相关 */
-       
-        // ,
-        // "usingComponents" : true
-    },
+    "mp-weixin" : {},
+    /* 微信小程序特有相关 */// ,
+    // "usingComponents" : true
     "mp-alipay" : {
         "usingComponents" : true
     },
@@ -120,24 +117,44 @@
     "mp-qq" : {
         "usingComponents" : true
     },
-	"h5" : {
-	    "devServer" : {
-	        "port" : 8080,
-	        "disableHostCheck" : true,
-	        "proxy" : {
-	            "/api" : {
-	                "target" : "http://192.168.1.7:8182/ps_lwms",
-	                // "target" : "http://wqms.joyue-tech.com/ps_lwms",
-	                "changeOrigin" : true, //是否跨域
-	                "secure" : false,
-	                "pathRewrite" : {
-	                    //使用代理； 告诉他你这个连接要用代理
-	                    "^/api" : ""
-	                }
-	            }
-	        }
-	    }
-	}
+    "h5" : {
+        "publicPath" : "./",
+        "router" : {
+            "mode" : "hash",
+            "base" : ""
+        },
+        "devServer" : {
+            "port" : 8080,
+            "disableHostCheck" : true,
+            "proxy" : {
+                "/api" : {
+                    "target" : "http://192.168.1.7:8182/ps_lwms",
+                    // "target" : "http://wqms.joyue-tech.com/ps_lwms",
+                    "changeOrigin" : true, //是否跨域
+                    "secure" : false,
+                    "pathRewrite" : {
+                        //使用代理； 告诉他你这个连接要用代理
+                        "^/api" : ""
+                    }
+                }
+            }
+        }
+    }
 }
-
+// "devServer" : {
+//     "port" : 8080,
+//     "disableHostCheck" : true,
+//     "proxy" : {
+//         "/api" : {
+//             "target" : "http://192.168.1.7:8182/ps_lwms",
+//             // "target" : "http://wqms.joyue-tech.com/ps_lwms",
+//             "changeOrigin" : true, //是否跨域
+//             "secure" : false,
+//             "pathRewrite" : {
+//                 //使用代理； 告诉他你这个连接要用代理
+//                 "^/api" : ""
+//             }
+//         }
+//     }
+// }
 

@@ -37,24 +37,70 @@
       
     </div>
 	<view class="box-charts">
-	 <view class="qiun-title-bar" style="position: relative;margin-bottom: 20px;margin-left: 10px;">
-		  <view class="qiun-title-dot-light">曲线图</view>
-		  <view class="unit">{{this.name}}</view>
-	  </view>
 	  <view class="qiun-charts" >
-		<canvas canvas-id="canvasLineA" disable-scroll=true id="canvasLineA" class="charts" @touchstart="touchLineA"  @touchmove="moveLineA" @touchend="touchEndLineA"></canvas>
+		  <echarts :option="option" style="height: 300px;"></echarts>
 	  </view>
 	</view>
   </div>
 </template>
 
 <script>
-	import uCharts from '@/components/u-charts/u-charts.js';
-
-
+import echarts from "@/components/echarts/echarts.vue";
 export default {
   data() {
     return {
+		option: {
+			notMerge: true, // 自定义变量：true代表不合并数据，比如从折线图变为柱形图则需设置为true；false或不写代表合并
+			tooltip: {
+				trigger: "axis",
+				axisPointer: {
+					type: "cross",
+					label: {
+						backgroundColor: "#6a7985"
+					}
+				},
+				positionStatus: true, // 自定义变量：是否防止tooltip超出画布
+				formatterStatus: true, // 自定义变量：是否格式化tooltip，设置为false时下面三项均不起作用
+				formatterUnit: 'mg/l', // 自定义变量：数值后面的单位
+				formatFloat2: true, // 自定义变量：是否格式化为两位小数
+				formatThousands: true // 自定义变量：是否添加千分位
+			},
+			title: {
+				text: '余氯/二氧化氯变化对比分析图',
+				subtext: '正常范围0.1-0.5',
+				left: 'center',
+				align: 'right'
+			},
+			
+			grid: {
+				left: "5%",
+				right: "8%",
+				bottom: "5%",
+				containLabel: true
+			},
+			xAxis: [{
+				type: "category",
+				boundaryGap: false,
+				data:  []
+			}],
+			yAxis: [{
+				type: "value",
+				name: '单位（mg/l）',
+				// max:0.6,
+				// min:0
+			}],
+			series:[{
+					type: "line",
+					markLine: {
+						data: [
+							{name: '余氯最低值',yAxis: 0.3,label: {normal: {position: 'end',formatter: '最低范围值'}}},
+							{name: '余氯最低值',yAxis: 0.5,label: {normal: {position: 'end',formatter: '最高范围值'}}}
+						]
+					},
+					data: []
+				}
+			]
+		},
       title: "picker",
       array: [
         {
@@ -74,6 +120,12 @@ export default {
           value: "4"
         }
       ],
+	  arrays: [
+		"正常范围0.3-0.5",
+		"正常范围6.5-8.5",
+		"正常范围≤0.7",
+		"正常范围≤1"
+	  ],
       index: "0",
       src: "",
       monitorList: [],
@@ -92,7 +144,8 @@ export default {
 	  cWidth:"",
 	  cHeight:"",
 	  times:"",
-	  name:"余氯 /二氧化氯(mg/l)"
+	  name:"余氯 /二氧化氯(mg/l)",
+	  maxs:""
     };
   },
   mounted() {
@@ -133,6 +186,8 @@ export default {
     // 查询
     inquire() {
       var _that = this;
+	  this.names = this.name;
+	  this.indexs =  this.index;
       var valueName = {
         "1": "余氯 /二氧化氯(mg/l)",
         "2": "PH值",
@@ -156,10 +211,10 @@ export default {
              s = s < 10 ? ('0' + s) : s;  
             return y + '-' + m + '-' + d + " "+ h +":" +s;
           });
-		  this.showArea("canvasLineA",result)
+		  this.showArea(result)
           uni.hideLoading();
         }
-      });
+      })
     },
     // 时间
     startDateChange(e) {
@@ -177,110 +232,96 @@ export default {
       this.startDates = `${year}-${month}-${day}`;
       return `${year}-${month}-${day}`;
     },
-    showArea(canvasId,result){
-	  var _self = this
-	  var chartData = {
-			categories: this.times,
-			series: [{
-				name: '今日',
-				data: result.now,
-				color: '#40B8ED'
-			},{
-				name: '昨日',
-				data: result.day,
-				color: '#67B54F'
-			},{
-				name: '上周',
-				data: result.week,
-				color: '#FD9000'
-			},{
-				name: '上月',
-				data: result.month,
-				color: '#FE0202'
-			},{
-				name: '上年',
-				data: result.year,
-				color: '#CE64EC'
-			}]
-		}
-		var canvaArea = {}
-		canvaArea=new uCharts({
-			$this:_self,
-			canvasId: canvasId,
-			type: 'area',
-			fontSize:11,
-			legend:{
-				show:true,
-				// position: 'top',
-			 //    float: 'right',
-			    padding: 20,
-			    margin: 0
-			},
-			enableScroll: true,//开启图表拖拽功能
-			dataLabel:true,
-			dataPointShape:false,
-			background:'#FFFFFF',
-			pixelRatio:1,
-			categories: chartData.categories,
-			series: chartData.series,
-			animation: true,
-			enableScroll: true,//开启图表拖拽功能
-			xAxis: {
-				type:'grid',
-				gridColor:'#CCCCCC',
-				gridType:'solid',
-				dashLength:8,
-				disableGrid:true,
-				boundaryGap: 'center',
-				rotateLabel: true, //X轴刻度（数值）标签是否旋转（仅在文案超过单屏宽度时有效）
-				itemCount:3,//x轴单屏显示数据的数量，默认为5个
-				scrollShow:true,//新增是否显示滚动条，默认false
-				scrollAlign:'left',//滚动条初始位置
-				scrollBackgroundColor:'#F7F7FF',//默认为 #EFEBEF
-				scrollColor:'#DEE7F7',//默认为 #A6A6A6
-			},
-			yAxis: {
-				gridType:'solid',
-				gridColor:'#CCCCCC',
-				dashLength:8,
-				splitNumber:5,
-				format:(val)=>{return val.toFixed(2)}
-			},
-			width: _self.cWidth*_self.pixelRatio,
-			height: _self.cHeight*_self.pixelRatio,
-			extra: {
-				area:{
-					type: 'straight',
-					opacity:0.2,
-					addLine:true,
-					width:2
-				},
-			}
-			
-		});
-		this.canvaLineA  = canvaArea
+    showArea(result){
+		var _this = this
+		var maxs = "";
 		
+		var markLines ={};
+		if(this.inex == "1"){
+			markLines: {
+				data: [
+					{name: '余氯/二氧化氯最低值',yAxis: 0.3,label: {normal: {position: 'end',formatter: '最低范围值'}}},
+					{name: '余氯/二氧化氯最高值',yAxis: 0.5,label: {normal: {position: 'end',formatter: '最高范围值'}}}
+				]
+			};
+			this.maxs = 0.6;
+			
+		}else if(this.inex == "2"){
+			markLines= {
+				data: [
+					{name: 'PH值最低值',yAxis: 6.5,label: {normal: {position: 'end',formatter: '最低范围值'}}},
+					{name: 'PH值最高值',yAxis: 8.5,label: {normal: {position: 'end',formatter: '最高范围值'}}}
+				]
+			};
+			this.maxs = 10;
+		}else if(this.inex == "4"){
+			markLines= {
+				data: [
+					{name: '亚氯酸盐最高值',yAxis: 0.7,label: {normal: {position: 'end',formatter: '最高范围值'}}}
+				]
+			};
+			this.maxs = 1;
+		}else if(this.inex == "3"){
+			markLines= {
+				data: [
+					{name: '浊度最高值',yAxis: 1,label: {normal: {position: 'end',formatter: '最高范围值'}}}
+				]
+			};
+			this.maxs = 1.5
+		}
+	  _this.option = {
+	  	notMerge: false, // 自定义变量：true代表不合并数据，比如从折线图变为柱形图则需设置为true；false或不写代表合并
+		title: {
+			text: this.names,
+			subtext:_this.arrays[this.indexs],
+			left: 'center',
+			align: 'right'
+		},
+	  	xAxis: {
+	  		type: 'category',
+	  		data: _this.times
+	  	},
+		yAxis: [{
+			type: "value",
+			name: '单位（mg/l）',
+			// max:_this.maxs,
+			// min:0
+		}],
+	  	series: [
+		{
+	  		name: '今日',
+			type: "line",
+	  		data: result.month,
+	  		color: '#40B8ED',
+			markLine: markLines
+	  	},{
+	  		name: '昨日',
+			type: "line",
+	  		data: result.day,
+	  		color: '#67B54F',
+	  	},{
+	  		name: '上周',
+			type: "line",
+	  		data: result.week,
+	  		color: '#FD9000',
+	  	},{
+	  		name: '上月',
+			type: "line",
+	  		data: result.month,
+	  		color: '#FE0202',
+	  	},{
+	  		name: '上年',
+			type: "line",
+	  		data: result.year,
+	  		color: '#CE64EC',
+	  	}]
+	  }
 	},
-	touchEndLineA(e) {
-		this.canvaLineA.scrollEnd(e);
-		this.canvaLineA.showToolTip(e, {
-			format: function (item, category) {
-				return category + ' ' + item.name + ':' + item.data 
-			}
-		});
-	},
-	 moveLineA(e){
-	 	this.canvaLineA.scroll(e);
-	 },
-	 touchLineA(e){
-	 	this.canvaLineA.scrollStart(e);
-	 }, 
+	
   }
 };
 </script>
-
 <style scoped>
-	
 .qiun-charts {
 	width: 750upx;
 	height: 500upx;
