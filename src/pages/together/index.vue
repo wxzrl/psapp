@@ -161,11 +161,12 @@ export default {
 	var  _self = this;
 	this.cWidth=uni.upx2px(750);
 	this.cHeight=uni.upx2px(500);
-    this.$api.formPCleanTask().then(res => {
-      if (res.data.code == 0) {
-        this.monitorList = res.data.pMonitoringPointList;
-      }
-    });
+    // this.$api.formPCleanTask().then(res => {
+    //   if (res.data.code == 0) {
+    //     this.monitorList = res.data.pMonitoringPointList;
+    //   }
+    // });
+	
   },
   methods: {
     // 频率
@@ -197,6 +198,7 @@ export default {
       uni.showLoading({
         title: "加载中"
       });
+	  
       this.$api.findMonitoringIndexPC(this.from).then(res => {
         if (res.data.code == 0) {
           var result = res.data.result;
@@ -234,11 +236,9 @@ export default {
     },
     showArea(result){
 		var _this = this
-		var maxs = "";
-		
 		var markLines ={};
-		if(this.inex == "1"){
-			markLines: {
+		if(this.index == "0"){
+			markLines= {
 				data: [
 					{name: '余氯/二氧化氯最低值',yAxis: 0.3,label: {normal: {position: 'end',formatter: '最低范围值'}}},
 					{name: '余氯/二氧化氯最高值',yAxis: 0.5,label: {normal: {position: 'end',formatter: '最高范围值'}}}
@@ -246,7 +246,7 @@ export default {
 			};
 			this.maxs = 0.6;
 			
-		}else if(this.inex == "2"){
+		}else if(this.index == "1"){
 			markLines= {
 				data: [
 					{name: 'PH值最低值',yAxis: 6.5,label: {normal: {position: 'end',formatter: '最低范围值'}}},
@@ -254,14 +254,14 @@ export default {
 				]
 			};
 			this.maxs = 10;
-		}else if(this.inex == "4"){
+		}else if(this.index == "3"){
 			markLines= {
 				data: [
 					{name: '亚氯酸盐最高值',yAxis: 0.7,label: {normal: {position: 'end',formatter: '最高范围值'}}}
 				]
 			};
 			this.maxs = 1;
-		}else if(this.inex == "3"){
+		}else if(this.index == "2"){
 			markLines= {
 				data: [
 					{name: '浊度最高值',yAxis: 1,label: {normal: {position: 'end',formatter: '最高范围值'}}}
@@ -269,6 +269,7 @@ export default {
 			};
 			this.maxs = 1.5
 		}
+		console.log(this.maxs)
 	  _this.option = {
 	  	notMerge: false, // 自定义变量：true代表不合并数据，比如从折线图变为柱形图则需设置为true；false或不写代表合并
 		title: {
@@ -284,8 +285,8 @@ export default {
 		yAxis: [{
 			type: "value",
 			name: '单位（mg/l）',
-			// max:_this.maxs,
-			// min:0
+			max:_this.maxs,
+			min:0
 		}],
 	  	series: [
 		{
@@ -314,7 +315,8 @@ export default {
 			type: "line",
 	  		data: result.year,
 	  		color: '#CE64EC',
-	  	}]
+	  	},
+		]
 	  }
 	},
 	
