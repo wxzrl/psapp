@@ -269,7 +269,6 @@ export default {
 			};
 			this.maxs = 1.5
 		}
-		console.log(this.maxs)
 	  _this.option = {
 	  	notMerge: false, // 自定义变量：true代表不合并数据，比如从折线图变为柱形图则需设置为true；false或不写代表合并
 		title: {
