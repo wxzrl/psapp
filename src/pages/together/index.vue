@@ -287,14 +287,14 @@ export default {
 		}],
 	  	series: [
 		{
-	  		name: '今日',
+	  	name: '今日',
 			type: "line",
-	  		data: result.month,
-	  		color: '#40B8ED',
+	  	data: result.month,
+	  	color: '#40B8ED',
 			markLine: markLines
 	  	},{
 	  		name: '昨日',
-			type: "line",
+			  type: "line",
 	  		data: result.day,
 	  		color: '#67B54F',
 	  	},{
