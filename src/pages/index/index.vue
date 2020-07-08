@@ -85,7 +85,6 @@
 			}
 		},
 		onLoad() {
-
 		},
 		methods: {
 

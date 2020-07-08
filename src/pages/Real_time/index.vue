@@ -9,19 +9,19 @@
 		 	{{list_data.monitoringPointName}}
 		 </cover-view>
 		 <cover-view style="position: absolute;top: 70upx;height: 20px;left: 20upx;z-index: 100;font-size: 28upx;color: #000;">
-		 	余氯（mg/1):{{list_data.monitoringPointName}}
+		 	余氯（mg/1):{{list_data.chlorineResidual}}
+		 </cover-view>
+		<!-- <cover-view style="position: absolute;top: 70upx;height: 20px;left: 410upx;z-index: 100;font-size: 28upx;color: #000;">
+		 	二氧化氯（mg/1):{{list_data.chlorineResidual}}
+		 </cover-view> -->
+		 <cover-view style="position: absolute;top: 120upx;height: 20px;left: 20upx;z-index: 100;font-size: 28upx;color: #000;">
+		 	亚氯酸盐（mg/1):{{list_data.ylsy}}
 		 </cover-view>
 		 <cover-view style="position: absolute;top: 70upx;height: 20px;left: 410upx;z-index: 100;font-size: 28upx;color: #000;">
-		 	二氧化氯（mg/1):0.1-0.8
-		 </cover-view>
-		 <cover-view style="position: absolute;top: 120upx;height: 20px;left: 20upx;z-index: 100;font-size: 28upx;color: #000;">
-		 	亚氯酸盐（mg/1):<0.7
+		 	PH值：{{list_data.phValue}}
 		 </cover-view>
 		 <cover-view style="position: absolute;top: 120upx;height: 20px;left: 410upx;z-index: 100;font-size: 28upx;color: #000;">
-		 	PH值：6.5-8.5
-		 </cover-view>
-		 <cover-view style="position: absolute;top: 170upx;height: 20px;left: 20upx;z-index: 100;font-size: 28upx;color: #000;">
-		 	浊度（NTU):<1
+		 	浊度（NTU):{{list_data.turbidity}}
 		 </cover-view>
 		 <cover-view class="box-map"></cover-view>
 		  <cover-view class="indicator_data">
@@ -80,8 +80,8 @@
 		 mktap(e){
 			for(var k in this.tableData){
 				if(this.tableData[k].pMonitoringPoint.id == e.detail.markerId.toString()){
-					console.log(this.tableData[k])
-					this.list_data = this.tableData[k]
+					this.list_data = this.tableData[k].pMonitoringPoint
+					console.log(this.list_data)
 				}			 
 			}
 		 }

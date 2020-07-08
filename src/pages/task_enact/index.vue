@@ -3,6 +3,7 @@
      <div class="box">
         <div class="rinse_box">
             <div class="rinse">
+				<i style="color: red;">*</i>
                 <span class="rinse_word">
                     监测点：
                 </span>
@@ -11,6 +12,7 @@
                 </picker>
             </div>
             <div class="rinse" @click="Clickdevice">
+				<i style="color: red;">*</i>
                 <span class="rinse_word">
                     设备：
                 </span>
@@ -19,6 +21,7 @@
                 </picker>
             </div>
             <div class="rinse">
+				<i style="color: red;">*</i>
                 <span class="rinse_word">
                     维护人员：
                 </span>
@@ -27,6 +30,7 @@
                 </picker>
             </div>
             <div class="rinse">
+				<i style="color: red;">*</i>
                 <span class="rinse_word">
                     清洗类型：
                 </span>
@@ -35,6 +39,7 @@
                 </picker>
             </div>
             <div class="rinse">
+				<i style="color: red;">*</i>
                 <span class="rinse_word">
                     计划时间：
                 </span>
@@ -105,6 +110,37 @@
 	},
     methods:{
 		smbit(){
+			if(this.from.cleanUserName == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请选择清洁人员',
+				});
+				return
+			}else if(this.from.deviceName == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请选择设备',
+				});
+				return
+			}else if(this.from.monitoringPointName == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请选择监测点',
+				});
+				return
+			}else if(this.from.cleanType == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请选择清洗类型',
+				});
+				return
+			}else if(this.from.planDate == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请选择计划日期',
+				});
+				return
+			}
 			this.$api.savePCleanTask(this.from).then(res=>{
 				if(res.data.code == 0){
 					uni.navigateTo({

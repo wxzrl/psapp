@@ -134,8 +134,8 @@ export default {
 					type: "line",
 					markLine: {
 						data: [
-							{name: '余氯/二氧化氯最低值',yAxis: 0.3,label: {normal: {position: 'end',formatter: '最低范围值'}}},
-							{name: '余氯/二氧化氯最低值',yAxis: 0.5,label: {normal: {position: 'end',formatter: '最高范围值'}}}
+							{name: '余氯/二氧化氯最低值',yAxis: 0.3,label: {normal: {position: 'end',formatter: '最低'}}},
+							{name: '余氯/二氧化氯最低值',yAxis: 0.5,label: {normal: {position: 'end',formatter: '最高'}}}
 						]
 					},
 					data: []
@@ -188,8 +188,8 @@ export default {
 					type: "line",
 					markLine: {
 						data: [
-							{name: 'PH值最低值',yAxis: 6.5,label: {normal: {position: 'end',formatter: '最低范围值'}}},
-							{name: 'PH值最高值',yAxis: 8.5,label: {normal: {position: 'end',formatter: '最高范围值'}}}
+							{name: 'PH值最低值',yAxis: 6.5,label: {normal: {position: 'end',formatter: '最低'}}},
+							{name: 'PH值最高值',yAxis: 8.5,label: {normal: {position: 'end',formatter: '最高'}}}
 						]
 					},
 					data: []
@@ -241,7 +241,7 @@ export default {
 					type: "line",
 					markLine: {
 						data: [
-							{name: '亚氯酸盐最低值',yAxis: 0.7,label: {normal: {position: 'end',formatter: '最高范围值'}}}
+							{name: '亚氯酸盐最低值',yAxis: 0.7,label: {normal: {position: 'end',formatter: '最高'}}}
 						]
 					},
 					data: []
@@ -294,7 +294,7 @@ export default {
 					type: "line",
 					markLine: {
 						data: [
-							{name: '浊度最高值',yAxis: 1,label: {normal: {position: 'end',formatter: '最高范围值'}}}
+							{name: '浊度最高值',yAxis: 1,label: {normal: {position: 'end',formatter: '最高'}}}
 						]
 					},
 					data: []

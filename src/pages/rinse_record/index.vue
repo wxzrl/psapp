@@ -3,6 +3,7 @@
      <div class="box">
         <div class="rinse_box">
 			<div class="rinse">
+				<i style="color: red;">*</i>
 			    <span class="rinse_word">
 			        监测点：
 			    </span>
@@ -13,6 +14,7 @@
 			    </picker>
 			</div>
             <div class="rinse">
+				<i style="color: red;">*</i>
                 <span class="rinse_word">
                     任务：
                 </span>
@@ -22,6 +24,7 @@
                 </picker>
             </div>
             <div class="rinse">
+				<i style="color: red;">*</i>
                 <span class="rinse_word">
                     设备状态：
                 </span>
@@ -31,6 +34,7 @@
                 </picker>
             </div>
             <div class="rinse">
+				<i style="color: red;">*</i>
                 <span class="rinse_word">
                     维护日期：
                 </span>
@@ -42,13 +46,13 @@
     </div>
     <div class="form_box">
         <div class="form">
-            <p class="form_word"> 处理过程描述：</p>
+            <p class="form_word"> <i style="color: red;margin-right: 5px;">*</i> 处理过程描述：</p>
             <input type="text" v-model="from.dealProcess" class="form_input" placeholder="请输入处理过程描述">
-            <p class="form_word"> 清洗维护项目：</p>
+            <p class="form_word"> <i style="color: red;margin-right: 5px;">*</i> 清洗维护项目：</p>
             <input v-model="from.cleanMaintain" type="text" class="form_input" placeholder="请输入清洗维护项目：">
-            <p class="form_word"> 设备异常描述：</p>
+            <p class="form_word"> <i style="color: red;margin-right: 5px;">*</i> 设备异常描述：</p>
             <input v-model="from.deviceErrDescribe" type="text" class="form_input" placeholder="请输入设备异常描述">
-            <p class="form_word"> 处理结果：</p>
+            <p class="form_word"> <i style="color: red;margin-right: 5px;">*</i> 处理结果：</p>
             <input v-model="from.deviceDealResult" type="text" class="form_input" placeholder="请输入处理结果">
             <p class="form_word"> 处理过程照片：
                 <image class="form_img" @click="takePhoto" src="../../static/picture.svg" alt="" srcset=""></image>
@@ -106,7 +110,64 @@
 		}
 	},
     methods:{
+		
 		cleanFrom(){
+			if(this.from.monitoringPointId == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请选择监测点',
+				});
+				return
+			}else if(this.from.taskId == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请选择任务',
+				});
+				return
+			}else if(this.from.monitoringPointName == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请选择监测点',
+				});
+				return
+			}else if(this.from.deviceCheckStatus == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请选择设备状态',
+				});
+				return
+			}else if(this.from.cleanDate == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请选择维护日期',
+				});
+				return
+			}else if(this.from.dealProcess == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请输入处理过程描述',
+				});
+				return
+			}else if(this.from.cleanMaintain == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请输入清洗维护项目',
+				});
+				return
+			}else if(this.from.deviceErrDescribe == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请输入设备异常描述',
+				});
+				return
+			}else if(this.from.deviceDealResult == ""){
+				uni.showModal({
+					title: '提示',
+					content: '请输入设备异常处理结果',
+				});
+				return
+			}
+			
 			this.$api.savePCleanRecord(this.from).then(res=>{
 				if(res.data.code == 0){
 					uni.navigateTo({

@@ -132,6 +132,5 @@
     border-top: 1px solid #656565;
     border-right: 1px solid #656565;
     transform: rotate(45deg);
-	
 }
 </style>
